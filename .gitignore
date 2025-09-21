@@ -1,0 +1,26 @@
+# Ignore Visual Studio 2022 files
+*.suo
+*.user
+*.userosscache
+*.vcxproj.*.filters
+Debug
+Release
+x64
+x86
+*.pdb
+*.ilk
+*.iobj
+*.ipdb
+*.obj
+*.pch
+*.vspscc
+*.vspx
+*.csv
+*.log
+*.opensdf
+*.opendatasource
+*.sdf
+*.sln
+*.TestResult.xml
+*.trx
+LocalTestRun.TestRuntime.dll
