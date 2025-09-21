@@ -1,3 +1,2 @@
-﻿  lexer.cpp
-D:\Arquivos\HDDR\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\variant(12): warning STL4038: The contents of <variant> are available only with C++17 or later.
+﻿  parser.cpp
   nucleo.vcxproj -> D:\Arquivos\Developers\CPP\nucleolang\source\nucleo\x64\Debug\nucleo.exe

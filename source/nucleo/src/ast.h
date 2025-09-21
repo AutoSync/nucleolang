@@ -2,6 +2,7 @@
 // https://github.com/AutoSync/nucleolang
 // AST - Abstract Syntax Tree Definition
 #pragma once
+#include "token.h"
 #include <memory>
 #include <vector>
 #include <string>
@@ -17,8 +18,14 @@ struct Expression {
 };
 
 struct UnaryExpression : Expression {
-	TokenKind op;
 	std::unique_ptr<Expression> operand;
+	TokenKind op;
+};
+
+struct BinaryExpression : Expression {
+	std::unique_ptr<Expression> left;
+	TokenKind op;
+	std::unique_ptr<Expression> right;
 };
 
 struct LiteralExpression : Expression {
@@ -56,5 +63,3 @@ struct BlockStatement : Statement {
 struct Program {
 	std::vector<std::unique_ptr<Statement>> statements;
 };
-
-

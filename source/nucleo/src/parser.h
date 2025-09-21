@@ -35,4 +35,10 @@ private:
 	std::unique_ptr<Expression> parseFactor();
 	std::unique_ptr<Expression> parseUnary();
 	std::unique_ptr<Expression> parsePrimary();
+	std::unique_ptr<Expression> parseBlock();
+	std::unique_ptr<Expression> parseVariableScopeDeclaration();
+	std::unique_ptr<Expression> parseVariableDeclaration();
+	std::unique_ptr<Expression> parseFunctionDeclaration();
+	std::unique_ptr<Expression> parseFunctionCall();
+	std::unique_ptr<Expression> parseIfStatement();
 };
