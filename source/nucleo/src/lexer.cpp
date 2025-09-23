@@ -10,11 +10,11 @@
 
 static const std::unordered_set<std::string> keywords = {
 	"local", "global", "public", "protected", "private", "get", "set",
-	"if", "else", "while", "for", "foeach", "do", 
-	"return", "break", "continue", "pause"
-	"true", "false", "null", "trash",
-	"promote", "function", "class", "struct", "enum", "switch",
-	"in", "to", "as", "out",
+	"if", "else", "while", "for", "foreach", "do", "switch", "case", "select",
+	"return", "break", "continue", "pause", "async",
+	"true", "false", "null", "trash", "empty", "nullptr",
+	"promote", "function", "class", "struct", "enum", 
+	"of", "to", "as", "in", "out", "import", "export",
 	"pipe", "console"
 };
 
@@ -140,7 +140,9 @@ Token Lexer::indentifierOrKeyword()
 	{
 		advance();
 	}
+
 	std::string lex = source.substr(_start, start - _start);
+
 	if (keywords.count(lex))
 	{
 		return make_token(TokenKind::Keyword, lex);
@@ -150,15 +152,9 @@ Token Lexer::indentifierOrKeyword()
 
 std::vector<Token> Lexer::tokenize() 
 {
-	if(debug)
-		std::cout << "Initialize Tokenize" << std::endl;
-
 	std::vector<Token> out;
 	while (true) 
 	{
-		if (debug)
-			std::cout << "Loop Tokenize" << std::endl;
-
 		skipWhitespaceAndComments();
 		
 		char look = peek();
@@ -174,7 +170,7 @@ std::vector<Token> Lexer::tokenize()
 			continue;
 		}
 		// Handle identifiers and keywords
-		if (isalpha((unsigned char)look || look == '_'))
+		if (isalpha((unsigned char)look) || look == '_')
 		{
 			out.push_back(indentifierOrKeyword());
 			continue;

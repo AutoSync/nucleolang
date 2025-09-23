@@ -72,25 +72,56 @@ const Token& Parser::consume(TokenKind kind, const std::string& message)
 
 std::unique_ptr<Statement> Parser::parseStatement()
 {
-	if (check(TokenKind::Keyword))
+	
+	// Use of local or global
+	if (check(TokenKind::Keyword) && (peek().lexeme == "local" || peek().lexeme == "global"))
 	{
-		if (peek().lexeme == "local" || peek().lexeme == "global")
+		if (debug)
+			std::cout << "is local or global modifier" << std::endl;
+
+		return parseVariableDeclaration();
+	}
+	// Explicity type string int float etc...
+	if (check(TokenKind::Identifier))
+	{
+		std::string potential_type;
+		static const std::unordered_set<std::string> types = {
+			"int", "float", "string", "char", "bool", "double", "byte"
+		};
+
+		if (types.count(potential_type) &&
+			current + 1 < tokens.size() &&
+			tokens[current + 1].kind == TokenKind::Identifier)
 		{
-			//return parseVariableDeclaration();
+
+			if (debug)
+				std::cout << "Explicity type" << std::endl;
+
+			return parseVariableDeclaration();
 		}
+			
+	}
+	// Inference statements (identifier followed by '=') 
+	if (check(TokenKind::Identifier) &&
+		current + 1 < tokens.size() &&
+		tokens[current + 1].kind == TokenKind::Assign)
+	{
+		
+
+		return parseVariableDeclaration();
 	}
 
-	// Handle Expression
-	if(auto expr = parseExpression())
+	//Fallback
+	if (auto expr = parseExpression())
 	{
-		auto stmt = std::make_unique<ExpressionStatement>();	
-		stmt->expression = std::move(expr);	
+		if (debug)
+			std::cout << "Fallback Expression" << std::endl;
 
+		auto stmt = std::make_unique<ExpressionStatement>();
+		stmt->expression = std::move(expr);
 		match(TokenKind::Semicolon);
 		return stmt;
 	}
-
-	//if, while, for, for each, switch, do while
 
 	return nullptr;
 }
@@ -239,20 +270,6 @@ std::unique_ptr<Expression> Parser::parsePrimary()
 		return expr;
 	}
 
-	if (match(TokenKind::LBrace))
-	{
-		auto expr = parseExpression();
-		consume(TokenKind::RBrace, "Expected '}' after expression");
-		return expr;
-	}
-
-	if (match(TokenKind::LBracket))
-	{
-		auto expr = parseExpression();
-		consume(TokenKind::RBracket, "Expected ']' after expression");
-		return expr;
-	}
-	
 	if (match(TokenKind::String))
 	{
 		auto expr = parseExpression();
@@ -270,12 +287,66 @@ std::unique_ptr<Expression> Parser::parsePrimary()
 	throw std::runtime_error("Unexpected token: " + peek().lexeme);
 }
 
-std::unique_ptr<Expression> Parser::parseBlock()
+std::unique_ptr<Statement> Parser::parseBlock()
 {
-	return std::unique_ptr<Expression>();
+	consume(TokenKind::LBrace, "Expected '{' before block");
+	auto block = std::make_unique<BlockStatement>();
+
+	while (!check(TokenKind::RBrace) && !check(TokenKind::End))
+	{
+		if (auto stmt = parseStatement()) {
+			block->statements.push_back(std::move(stmt));
+		}
+	}
+
+	consume(TokenKind::RBrace, "Expected '}' after block");
+	return block;
 }
 
-//std::unique_ptr<Expression> Parser::parseVariableScopeDeclaration()
-//{
-//
-//}
+std::unique_ptr<Statement> Parser::parseVariableDeclaration()
+{
+	auto var_decl = std::make_unique<VariableDeclaration>();
+
+	// local or global modifier
+	if (check(TokenKind::Keyword) && (peek().lexeme == "local" || peek().lexeme == "global"))
+	{
+		var_decl->is_global = peek().lexeme == "global";
+		advance();
+	}
+
+	// Explicitly type
+	if (check(TokenKind::Identifier))
+	{
+		std::string potential_type = peek().lexeme;
+		static const std::unordered_set<std::string> types = {
+		"int", "float", "string", "char", "bool", "double", "byte" };
+
+		if (types.count(potential_type) &&
+			current + 1 < tokens.size() &&
+			tokens[current + 1].kind == TokenKind::Identifier)
+			{
+				var_decl->has_explicit_type = true;	//VarDecl ::= "type" "name"
+				var_decl->type_name = potential_type;
+				advance();	//Consume type
+
+				consume(TokenKind::Identifier, "Expected variable name after type");	//Variable name)
+				var_decl->name = tokens[current - 1].lexeme;	//VarDec
+		}
+		else {
+			var_decl->has_explicit_type = false;	//VarDec ::= "name"
+			consume(TokenKind::Identifier, "Expected variable name");	//Variable name)
+			var_decl->name = tokens[current - 1].lexeme;	
+		}
+	}
+
+	//Consume operator assing
+	consume(TokenKind::Assign, "Expected '=' after variable name");
+
+	//Parse initial value
+	var_decl->initializer = parseExpression();
+
+	//Consume semicolon if needed
+	match(TokenKind::Semicolon);
+
+	return var_decl;
+}

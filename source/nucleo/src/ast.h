@@ -53,7 +53,10 @@ struct ExpressionStatement : Statement {
 
 struct VariableDeclaration : Statement {
 	std::string name;
-	std::unique_ptr<Expression> initialize;
+	std::unique_ptr<Expression> initializer;
+	bool is_global = false;						// Scope local/Global
+	bool has_explicit_type = false;				// inference or explicit typing
+	std::string type_name;						// para tipagem explícita (ex: "string", "int")
 };
 
 struct BlockStatement : Statement {

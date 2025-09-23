@@ -8,12 +8,15 @@
 #include "token.h"
 #include <vector>
 #include <memory>
+#include <unordered_set>
 
 class Parser {
 public:
 	Parser(const std::vector<Token>& tokens);
 	std::unique_ptr<Program> parse();
 private:
+	//Debug
+	bool debug = false;
 	// Variables
 	std::vector<Token> tokens;
 	size_t current = 0;
@@ -35,10 +38,6 @@ private:
 	std::unique_ptr<Expression> parseFactor();
 	std::unique_ptr<Expression> parseUnary();
 	std::unique_ptr<Expression> parsePrimary();
-	std::unique_ptr<Expression> parseBlock();
-	std::unique_ptr<Expression> parseVariableScopeDeclaration();
-	std::unique_ptr<Expression> parseVariableDeclaration();
-	std::unique_ptr<Expression> parseFunctionDeclaration();
-	std::unique_ptr<Expression> parseFunctionCall();
-	std::unique_ptr<Expression> parseIfStatement();
+	std::unique_ptr<Statement> parseBlock();
+	std::unique_ptr<Statement> parseVariableDeclaration();
 };

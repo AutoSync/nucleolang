@@ -130,8 +130,8 @@
   <ItemGroup>
     <ClCompile Include="src\codegen.cpp" />
     <ClCompile Include="src\lexer.cpp" />
-    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\parser.cpp" />
+    <ClCompile Include="src\parse_test_read_from_file.cpp" />
     <ClCompile Include="src\semantic.cpp" />
     <ClCompile Include="src\vm.cpp" />
   </ItemGroup>
