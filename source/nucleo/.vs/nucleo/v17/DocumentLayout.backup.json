@@ -62,8 +62,7 @@
               "RelativeToolTip": "src\\parse_test_read_from_file.cpp",
               "ViewState": "AgIAAIIAAAAAAAAAAADwv58AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-23T21:11:03.229Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-23T21:11:03.229Z"
             },
             {
               "$type": "Document",
@@ -112,8 +111,7 @@
               "RelativeToolTip": "src\\token.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-19T22:45:54.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-19T22:45:54.556Z"
             },
             {
               "$type": "Document",
@@ -125,8 +123,7 @@
               "RelativeToolTip": "src\\parser.h",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABIAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-21T16:07:41.842Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-21T16:07:41.842Z"
             },
             {
               "$type": "Document",
@@ -138,8 +135,7 @@
               "RelativeToolTip": "src\\parser.cpp",
               "ViewState": "AgIAAGMAAAAAAAAAAAAYwHUAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-19T22:44:24.177Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-19T22:44:24.177Z"
             },
             {
               "$type": "Document",
@@ -151,8 +147,7 @@
               "RelativeToolTip": "src\\lexer.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-19T22:44:06.324Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-19T22:44:06.324Z"
             },
             {
               "$type": "Document",
@@ -164,8 +159,7 @@
               "RelativeToolTip": "src\\lexer.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-19T22:43:55.453Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-19T22:43:55.453Z"
             }
           ]
         }
