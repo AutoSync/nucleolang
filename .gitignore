@@ -24,3 +24,15 @@ x86
 *.TestResult.xml
 *.trx
 LocalTestRun.TestRuntime.dll
+
+# Arquivos do Windows
+# Arquivos binários
+[Bb]in/
+[Oo]bj/
+
+# Arquivos específicos do Visual Studio
+.vs/
+*.suo
+*.user
+*.sln.doc
+*.userosscache
