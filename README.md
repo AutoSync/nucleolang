@@ -1,5 +1,7 @@
 # Nucleo Programming Language
 
+![version](https://img.shields.io/badge/version-V.010.0%2F2025-blue)
+
 Nucleo é uma linguagem de alto nível projetada para operar próximo ao nível de hardware, permitindo acesso direto à memória e ao processamento através de **clusters** que enviam e recebem dados.  
 Seu design separa a interface do processamento de dados, oferecendo flexibilidade para aplicações de baixo e alto nível.
 
