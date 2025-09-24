@@ -90,7 +90,7 @@ std::unique_ptr<Statement> Parser::parseStatement()
 	// Foreach statement
 	if (check(TokenKind::Keyword) && peek().lexeme == "foreach")
 	{
-		return parseForStatement();
+		return parseForeachStatement();
 	}
 	// Do while statement
 	if (check(TokenKind::Keyword) && peek().lexeme == "do")
@@ -114,7 +114,7 @@ std::unique_ptr<Statement> Parser::parseStatement()
 	// Explicity type string int float etc...
 	if (check(TokenKind::Identifier))
 	{
-		std::string potential_type;
+		std::string potential_type = peek().lexeme;
 		static const std::unordered_set<std::string> types = {
 			"int", "float", "string", "char", "bool", "double", "byte"
 		};
@@ -139,8 +139,13 @@ std::unique_ptr<Statement> Parser::parseStatement()
 
 		return parseVariableDeclaration();
 	}
+	//Fallback 
+	if (check(TokenKind::LBrace))
+	{
+		return parseBlock();
+	}
 
-	//Fallback
+	//Fallback for expressions
 	if (auto expr = parseExpression())
 	{
 		auto stmt = std::make_unique<ExpressionStatement>();
@@ -258,11 +263,23 @@ std::unique_ptr<Expression> Parser::parseUnary()
 
 std::unique_ptr<Expression> Parser::parsePrimary()
 {
+	// true/false/null
+	if (match(TokenKind::Keyword) &&
+		peek().lexeme == "true" ||
+		peek().lexeme == "false" ||
+		peek().lexeme == "null")
+	{
+		auto literal = std::make_unique<LiteralExpression>();
+		literal->value = peek().lexeme;
+		literal->types = TokenKind::Keyword;
+		advance();
+		return literal;
+	}
 	if (match(TokenKind::Number))
 	{
 		auto literal = std::make_unique<LiteralExpression>();
 		literal->value = tokens[current - 1].lexeme;
-		literal->Types = TokenKind::Number;
+		literal->types = TokenKind::Number;
 		return literal;
 	}
 
@@ -270,7 +287,7 @@ std::unique_ptr<Expression> Parser::parsePrimary()
 	{
 		auto literal = std::make_unique<LiteralExpression>();
 		literal->value = tokens[current - 1].lexeme;
-		literal->Types = TokenKind::StringLiteral;
+		literal->types = TokenKind::StringLiteral;
 		return literal;
 	}
 
@@ -278,7 +295,7 @@ std::unique_ptr<Expression> Parser::parsePrimary()
 	{
 		auto literal = std::make_unique<LiteralExpression>();
 		literal->value = tokens[current - 1].lexeme;
-		literal->Types = TokenKind::Char;
+		literal->types = TokenKind::Char;
 		return literal;
 	}
 
@@ -293,20 +310,6 @@ std::unique_ptr<Expression> Parser::parsePrimary()
 	{
 		auto expr = parseExpression();
 		consume(TokenKind::RParen, "Expected ')' after expression");
-		return expr;
-	}
-
-	if (match(TokenKind::String))
-	{
-		auto expr = parseExpression();
-		consume(TokenKind::String, "Expected '\"' after expression");
-		return expr;
-	}
-
-	if (match(TokenKind::Char))
-	{
-		auto expr = parseExpression();
-		consume(TokenKind::Char, "Expected '\'' after expression");
 		return expr;
 	}
 
@@ -390,20 +393,16 @@ std::unique_ptr<Statement> Parser::parseIfStatement()
 	// Parse Condition
 	consume(TokenKind::LParen, "Expected '(' after 'if'");
 	stmt->condition = parseExpression();
-	consume(TokenKind::RParen, "Expected ')' after condition");
+	consume(TokenKind::RParen, "Expected ')' after condition in 'if'");
 	
 	// Parse Then
-	consume(TokenKind::LBrace, "Expected '{' after condition");
 	stmt->thenBranch = parseStatement();
-	consume(TokenKind::RBrace, "Expected '}' after statement");
 
 	// Parse Else
 	if (check(TokenKind::Keyword) && peek().lexeme == "else")
 	{
 		advance();
-		consume(TokenKind::LBrace, "Expected '{' after 'else'");
 		stmt->elseBranch = parseStatement();
-		consume(TokenKind::RBrace, "Expected '}' after statement");
 	}
 	return stmt;
 }
@@ -416,12 +415,10 @@ std::unique_ptr<Statement> Parser::parseWhileStatement()
 	// Parse Condition
 	consume(TokenKind::LParen, "Expected '(' after 'while'");
 	stmt->condition = parseExpression();
-	consume(TokenKind::RParen, "Expected ')' after condition");
+	consume(TokenKind::RParen, "Expected ')' after condition in 'while loop'");
 
 	//Parse Body
-	consume(TokenKind::LBrace, "Expected '{' after condition");
 	stmt->body = parseStatement();
-	consume(TokenKind::RBrace, "Expected '}' after statement");
 	return stmt;
 }
 
@@ -431,16 +428,16 @@ std::unique_ptr<Statement> Parser::parseDoWhileStatement()
 	//Consume Do
 	consume(TokenKind::Keyword, "Expected do before condition");
 	// Parse Body
-	consume(TokenKind::LBrace, "Expected '{' after do");
 	stmt->body = parseStatement();
-	consume(TokenKind::RBrace, "Expected '}' after statement");
-
 	// Consume While
 	consume(TokenKind::Keyword, "Expected while before condition");
 	// Parse Condition
 	consume(TokenKind::LParen, "Expected '(' after 'while'");
 	stmt->condition = parseExpression();
-	consume(TokenKind::RParen, "Expected ')' after condition");
+	consume(TokenKind::RParen, "Expected ')' after condition in 'do while loop'");
+
+	match(TokenKind::Semicolon);
+
 	// Parse Body
 	return stmt;
 }
@@ -449,17 +446,15 @@ std::unique_ptr<Statement> Parser::parseForStatement()
 {
 	auto stmt = std::make_unique<ForStatement>();
 	// Consume For
-	consume(TokenKind::Keyword, "Expected for before condition");
+	consume(TokenKind::Keyword, "Expected 'for' before condition");
 
 	// Parse Condition
 	consume(TokenKind::LParen, "Expected '(' after 'for'");
 	stmt->condition = parseExpression();
-	consume(TokenKind::RParen, "Expected ')' after condition");
+	consume(TokenKind::RParen, "Expected ')' after condition in 'for loop'");
 
 	//Parse Body
-	consume(TokenKind::LBrace, "Expected '{' after for");
 	stmt->body = parseStatement();
-	consume(TokenKind::RBrace, "Expected '}' after statement");
 
 	return stmt;
 }
@@ -476,10 +471,7 @@ std::unique_ptr<Statement> Parser::parseForeachStatement()
 	consume(TokenKind::RParen, "Expected ')' after condition ");
 
 	// Parse Body
-	consume(TokenKind::LBrace, "Expected '{' after foreach");
 	stmt->body = parseStatement();
-	consume(TokenKind::RBrace, "Expected '}' after statement");
-
 	return stmt;
 }
 
@@ -491,64 +483,70 @@ std::unique_ptr<Statement> Parser::parseSwitchStatement()
 
 	// Parse Condition
 	consume(TokenKind::LParen, "Expected '(' after 'switch'");
-	stmt->condition = parseExpression();
+	stmt->expression = parseExpression();
 	consume(TokenKind::RParen, "Expected ')' after condition");
 
-	// Parse Body
-	consume(TokenKind::LBrace, "Expected '{' after switch");
-	while (!check(TokenKind::RBrace) && !check(TokenKind::End))
+	/*
 	{
-		if (check(TokenKind::Keyword) && peek().lexeme == "case")
+		// Parse Body
+		while (!check(TokenKind::RBrace) && !check(TokenKind::End))
 		{
-			auto casestmt = std::make_unique<CaseStatement>();
-			// Consume Case
-			advance();
-
-			// Parse Condition
-			casestmt->condition = parseExpression();
-
-			//Consume colon
-			consume(TokenKind::Colon, "Expected ':' after case");
-
-			// Parse case body (can be a block or a single statement)
-			if (check(TokenKind::LBrace))
+			if (check(TokenKind::Keyword) && peek().lexeme == "case")
 			{
-				casestmt->body = parseBlock();
+				auto casestmt = std::make_unique<CaseStatement>();
+				// Consume Case
+				advance();
+
+				// Parse Condition
+				casestmt->condition = parseExpression();
+
+				//Consume colon
+				consume(TokenKind::Colon, "Expected ':' after case");
+
+				// Parse case body (can be a block or a single statement)
+				if (check(TokenKind::LBrace))
+				{
+					casestmt->body = parseBlock();
+				}
+				else
+				{
+					casestmt->body = parseStatement();
+				}
+
+				stmt->cases.push_back(std::move(casestmt)); // Add case to switch
+			}
+			else if (check(TokenKind::Keyword) && peek().lexeme == "default")
+			{
+				auto caseStmt = std::make_unique<CaseStatement>();
+
+				// Consume 'default'
+				advance();
+
+				// Consume colon
+				consume(TokenKind::Colon, "Expected ':' after default");
+
+				// Parse default body
+				if (check(TokenKind::LBrace))
+				{
+					caseStmt->body = parseBlock();
+				}
+				else
+				{
+					caseStmt->body = parseStatement();
+				}
+
+				stmt->cases.push_back(std::move(caseStmt));
 			}
 			else
 			{
-				casestmt->body = parseStatement();
+				break;
 			}
-
-			stmt->cases.push_back(std::move(casestmt)); // Add case to switch
-		}
-		else if (check(TokenKind::Keyword) && peek().lexeme == "default")
-		{
-			auto caseStmt = std::make_unique<CaseStatement>();
-
-			// Consume 'default'
-			advance();
-
-			// Consume colon
-			consume(TokenKind::Colon, "Expected ':' after default");
-
-			// Parse default body
-			if (check(TokenKind::LBrace))
-			{
-				caseStmt->body = parseBlock();
-			}
-			else
-			{
-				caseStmt->body = parseStatement();
-			}
-
-			stmt->cases.push_back(std::move(caseStmt));
-		}
-		else
-		{
-			break;
 		}
 	}
-	consume(TokenKind::RBrace, "Expected '}' after switch");
+	*/
+
+
+
+
 	return stmt;
 }

@@ -1,0 +1,290 @@
+Nucleo Lang Compiler
+Loading: test.nu
+========================================
+Source code:
+----------------------------------------
+// Teste completo das estruturas de controle Nucleo Lang
+
+// Vari├íveis b├ísicas
+local x = 10
+global y = 20
+
+// If-else statement
+if (x > 5) {
+    local result = "x ├® maior que 5"
+} else {
+    local result = "x ├® menor ou igual a 5"
+}
+
+// If sem else
+if (y == 20) {
+    local message = "y ├® igual a 20"
+}
+
+// While loop
+local counter = 0
+while (counter < 5) {
+    counter = counter + 1
+}
+
+// Do-while loop
+local doCounter = 0
+do {
+    doCounter = doCounter + 1
+} while (doCounter < 3)
+
+// Switch statement
+local day = 3
+switch (day) {
+    case 1:
+        local dayName = "Segunda"
+    case 2:
+        local dayName = "Ter├ºa"
+    case 3:
+        local dayName = "Quarta"
+    default:
+        local dayName = "Dia inv├ílido"
+}
+
+// Express├Áes aninhadas
+if (x > 0 && y < 30) {
+    local complex = (x + y) * 2
+    if (complex > 50) {
+        local nested = "complex ├® maior que 50"
+    }
+}
+
+// Operadores diversos
+local a = 10 + 5 * 2
+local b = (10 + 5) * 2
+local c = !true
+local d = -x
+----------------------------------------
+
+LEXICAL ANALYSIS
+----------------------------------------
+Tokens found:
+[0] Keyword 'local' (line 4, col 1)
+[1] Identifier 'x' (line 4, col 7)
+[2] Assign '=' (line 4, col 9)
+[3] Number '10' (line 4, col 11)
+[4] Keyword 'global' (line 5, col 1)
+[5] Identifier 'y' (line 5, col 8)
+[6] Assign '=' (line 5, col 10)
+[7] Number '20' (line 5, col 12)
+[8] Keyword 'if' (line 8, col 1)
+[9] LParen '(' (line 8, col 4)
+[10] Identifier 'x' (line 8, col 5)
+[11] GreaterThan '>' (line 8, col 7)
+[12] Number '5' (line 8, col 9)
+[13] RParen ')' (line 8, col 10)
+[14] LBrace '{' (line 8, col 12)
+[15] Keyword 'local' (line 9, col 5)
+[16] Identifier 'result' (line 9, col 11)
+[17] Assign '=' (line 9, col 18)
+[18] StringLiteral 'x ├® maior que 5' (line 9, col 22)
+[19] RBrace '}' (line 10, col 1)
+[20] Keyword 'else' (line 10, col 3)
+[21] LBrace '{' (line 10, col 8)
+[22] Keyword 'local' (line 11, col 5)
+[23] Identifier 'result' (line 11, col 11)
+[24] Assign '=' (line 11, col 18)
+[25] StringLiteral 'x ├® menor ou igual a 5' (line 11, col 22)
+[26] RBrace '}' (line 12, col 1)
+[27] Keyword 'if' (line 15, col 1)
+[28] LParen '(' (line 15, col 4)
+[29] Identifier 'y' (line 15, col 5)
+[30] Equal '==' (line 15, col 7)
+[31] Number '20' (line 15, col 10)
+[32] RParen ')' (line 15, col 12)
+[33] LBrace '{' (line 15, col 14)
+[34] Keyword 'local' (line 16, col 5)
+[35] Identifier 'message' (line 16, col 11)
+[36] Assign '=' (line 16, col 19)
+[37] StringLiteral 'y ├® igual a 20' (line 16, col 23)
+[38] RBrace '}' (line 17, col 1)
+[39] Keyword 'local' (line 20, col 1)
+[40] Identifier 'counter' (line 20, col 7)
+[41] Assign '=' (line 20, col 15)
+[42] Number '0' (line 20, col 17)
+[43] Keyword 'while' (line 21, col 1)
+[44] LParen '(' (line 21, col 7)
+[45] Identifier 'counter' (line 21, col 8)
+[46] LessThan '<' (line 21, col 16)
+[47] Number '5' (line 21, col 18)
+[48] RParen ')' (line 21, col 19)
+[49] LBrace '{' (line 21, col 21)
+[50] Identifier 'counter' (line 22, col 5)
+[51] Assign '=' (line 22, col 13)
+[52] Identifier 'counter' (line 22, col 15)
+[53] Add '+' (line 22, col 23)
+[54] Number '1' (line 22, col 25)
+[55] RBrace '}' (line 23, col 1)
+[56] Keyword 'local' (line 26, col 1)
+[57] Identifier 'doCounter' (line 26, col 7)
+[58] Assign '=' (line 26, col 17)
+[59] Number '0' (line 26, col 19)
+[60] Keyword 'do' (line 27, col 1)
+[61] LBrace '{' (line 27, col 4)
+[62] Identifier 'doCounter' (line 28, col 5)
+[63] Assign '=' (line 28, col 15)
+[64] Identifier 'doCounter' (line 28, col 17)
+[65] Add '+' (line 28, col 27)
+[66] Number '1' (line 28, col 29)
+[67] RBrace '}' (line 29, col 1)
+[68] Keyword 'while' (line 29, col 3)
+[69] LParen '(' (line 29, col 9)
+[70] Identifier 'doCounter' (line 29, col 10)
+[71] LessThan '<' (line 29, col 20)
+[72] Number '3' (line 29, col 22)
+[73] RParen ')' (line 29, col 23)
+[74] Keyword 'local' (line 32, col 1)
+[75] Identifier 'day' (line 32, col 7)
+[76] Assign '=' (line 32, col 11)
+[77] Number '3' (line 32, col 13)
+[78] Keyword 'switch' (line 33, col 1)
+[79] LParen '(' (line 33, col 8)
+[80] Identifier 'day' (line 33, col 9)
+[81] RParen ')' (line 33, col 12)
+[82] LBrace '{' (line 33, col 14)
+[83] Keyword 'case' (line 34, col 5)
+[84] Number '1' (line 34, col 10)
+[85] Colon ':' (line 34, col 11)
+[86] Keyword 'local' (line 35, col 9)
+[87] Identifier 'dayName' (line 35, col 15)
+[88] Assign '=' (line 35, col 23)
+[89] StringLiteral 'Segunda' (line 35, col 27)
+[90] Keyword 'case' (line 36, col 5)
+[91] Number '2' (line 36, col 10)
+[92] Colon ':' (line 36, col 11)
+[93] Keyword 'local' (line 37, col 9)
+[94] Identifier 'dayName' (line 37, col 15)
+[95] Assign '=' (line 37, col 23)
+[96] StringLiteral 'Ter├ºa' (line 37, col 27)
+[97] Keyword 'case' (line 38, col 5)
+[98] Number '3' (line 38, col 10)
+[99] Colon ':' (line 38, col 11)
+[100] Keyword 'local' (line 39, col 9)
+[101] Identifier 'dayName' (line 39, col 15)
+[102] Assign '=' (line 39, col 23)
+[103] StringLiteral 'Quarta' (line 39, col 27)
+[104] Identifier 'default' (line 40, col 5)
+[105] Colon ':' (line 40, col 12)
+[106] Keyword 'local' (line 41, col 9)
+[107] Identifier 'dayName' (line 41, col 15)
+[108] Assign '=' (line 41, col 23)
+[109] StringLiteral 'Dia inv├ílido' (line 41, col 27)
+[110] RBrace '}' (line 42, col 1)
+[111] Keyword 'if' (line 45, col 1)
+[112] LParen '(' (line 45, col 4)
+[113] Identifier 'x' (line 45, col 5)
+[114] GreaterThan '>' (line 45, col 7)
+[115] Number '0' (line 45, col 9)
+[116] And '&&' (line 45, col 11)
+[117] Identifier 'y' (line 45, col 14)
+[118] LessThan '<' (line 45, col 16)
+[119] Number '30' (line 45, col 18)
+[120] RParen ')' (line 45, col 20)
+[121] LBrace '{' (line 45, col 22)
+[122] Keyword 'local' (line 46, col 5)
+[123] Identifier 'complex' (line 46, col 11)
+[124] Assign '=' (line 46, col 19)
+[125] LParen '(' (line 46, col 21)
+[126] Identifier 'x' (line 46, col 22)
+[127] Add '+' (line 46, col 24)
+[128] Identifier 'y' (line 46, col 26)
+[129] RParen ')' (line 46, col 27)
+[130] Mul '*' (line 46, col 29)
+[131] Number '2' (line 46, col 31)
+[132] Keyword 'if' (line 47, col 5)
+[133] LParen '(' (line 47, col 8)
+[134] Identifier 'complex' (line 47, col 9)
+[135] GreaterThan '>' (line 47, col 17)
+[136] Number '50' (line 47, col 19)
+[137] RParen ')' (line 47, col 21)
+[138] LBrace '{' (line 47, col 23)
+[139] Keyword 'local' (line 48, col 9)
+[140] Identifier 'nested' (line 48, col 15)
+[141] Assign '=' (line 48, col 22)
+[142] StringLiteral 'complex ├® maior que 50' (line 48, col 26)
+[143] RBrace '}' (line 49, col 5)
+[144] RBrace '}' (line 50, col 1)
+[145] Keyword 'local' (line 53, col 1)
+[146] Identifier 'a' (line 53, col 7)
+[147] Assign '=' (line 53, col 9)
+[148] Number '10' (line 53, col 11)
+[149] Add '+' (line 53, col 14)
+[150] Number '5' (line 53, col 16)
+[151] Mul '*' (line 53, col 18)
+[152] Number '2' (line 53, col 20)
+[153] Keyword 'local' (line 54, col 1)
+[154] Identifier 'b' (line 54, col 7)
+[155] Assign '=' (line 54, col 9)
+[156] LParen '(' (line 54, col 11)
+[157] Number '10' (line 54, col 12)
+[158] Add '+' (line 54, col 15)
+[159] Number '5' (line 54, col 17)
+[160] RParen ')' (line 54, col 18)
+[161] Mul '*' (line 54, col 20)
+[162] Number '2' (line 54, col 22)
+[163] Keyword 'local' (line 55, col 1)
+[164] Identifier 'c' (line 55, col 7)
+[165] Assign '=' (line 55, col 9)
+[166] Not '!' (line 55, col 11)
+[167] Keyword 'true' (line 55, col 12)
+[168] Keyword 'local' (line 56, col 1)
+[169] Identifier 'd' (line 56, col 7)
+[170] Assign '=' (line 56, col 9)
+[171] Sub '-' (line 56, col 11)
+[172] Identifier 'x' (line 56, col 12)
+[173] End '' (line 56, col 13)
+
+SYNTACTIC ANALYSIS
+----------------------------------------
+Parse error: Expected '}' after switch at line 40
+Parse error: Unexpected token: :
+Parse error: Unexpected token: }
+Parse error: Expected ')' after condition at line 45
+Parse error: Unexpected token: )
+Parse error: Unexpected token: {
+Parse error: Unexpected token: }
+Parse error: Unexpected token: true
+
+=== ABSTRACT SYNTAX TREE ===
+Statement 1:
+
+Statement 2:
+
+Statement 3:
+
+Statement 4:
+
+Statement 5:
+
+Statement 6:
+
+Statement 7:
+
+Statement 8:
+
+Statement 9:
+
+Statement 10:
+
+Statement 11:
+
+Statement 12:
+
+Statement 13:
+
+Statement 14:
+
+Statement 15:
+
+Statement 16:
+
+
+COMPILATION SUCCESSFUL!
+Statistics:
+  - Statements: 16
+  - Tokens: 174

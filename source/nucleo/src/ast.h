@@ -30,7 +30,7 @@ struct BinaryExpression : Expression {
 
 struct LiteralExpression : Expression {
 	std::string value;
-	TokenKind Types;
+	TokenKind types;
 };
 
 struct IdentifierExpression : Expression {
@@ -98,7 +98,7 @@ struct CaseStatement : Statement {
 };
 
 struct SwitchStatement : Statement {
-	std::unique_ptr<Expression> condition;
+	std::unique_ptr<Expression> expression;
 	std::vector<std::unique_ptr<CaseStatement>> cases;
 	std::unique_ptr<Statement> defaultCase;
 };

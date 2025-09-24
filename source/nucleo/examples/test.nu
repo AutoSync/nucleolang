@@ -15,6 +15,18 @@ if (x > 5) {
 if (y == 20) {
     local message = "y é igual a 20"
 }
+// for loop
+local i = 0
+local x = 0
+for (i < 10){
+	x = i
+}
+
+// foreach loop
+local len = 10
+foreach (len){
+	local x = 0
+}
 
 // While loop
 local counter = 0
@@ -34,11 +46,11 @@ switch (day) {
     case 1:
         local dayName = "Segunda"
     case 2:
-        local dayName = "Terça" 
+        local dayName = "Terca" 
     case 3:
         local dayName = "Quarta"
     default:
-        local dayName = "Dia inválido"
+        local dayName = "Dia invalido"
 }
 
 // Expressões aninhadas
@@ -50,7 +62,7 @@ if (x > 0 && y < 30) {
 }
 
 // Operadores diversos
-local a = 10 + 5 * 2
-local b = (10 + 5) * 2
-local c = !true
-local d = -x
+local a = 10 + 5 * 2		//Number
+local b = (10 + 5) * 2		//Number
+local c = !true			//bool
+local d = -x			//number
