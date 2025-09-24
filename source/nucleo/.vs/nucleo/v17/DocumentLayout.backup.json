@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\ast.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|solutionrelative:src\\ast.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\parser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|solutionrelative:src\\parser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\lexer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|solutionrelative:src\\lexer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\ast.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|solutionrelative:src\\ast.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\parser.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|solutionrelative:src\\parser.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\parser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|solutionrelative:src\\parser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\parse_test_read_from_file.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|solutionrelative:src\\parse_test_read_from_file.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\lexer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|solutionrelative:src\\lexer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6E1A8F0E-A397-4F3E-8C5B-1C5A6CFE91FD}|nucleo.vcxproj|D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\lexer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -46,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,25 +54,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "parse_test_read_from_file.cpp",
               "DocumentMoniker": "D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\parse_test_read_from_file.cpp",
               "RelativeDocumentMoniker": "src\\parse_test_read_from_file.cpp",
               "ToolTip": "D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\parse_test_read_from_file.cpp",
               "RelativeToolTip": "src\\parse_test_read_from_file.cpp",
-              "ViewState": "AgIAAIIAAAAAAAAAAADwv58AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAIMAAAAAAAAAAADwv58AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-23T21:11:03.229Z"
+              "WhenOpened": "2025-09-23T21:11:03.229Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ast.h",
               "DocumentMoniker": "D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\ast.h",
               "RelativeDocumentMoniker": "src\\ast.h",
               "ToolTip": "D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\ast.h",
               "RelativeToolTip": "src\\ast.h",
-              "ViewState": "AgIAACAAAAAAAAAAAAAQwDcAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAADgv1QAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-09-21T20:31:57.001Z",
               "EditorCaption": ""
@@ -121,21 +122,23 @@
               "RelativeDocumentMoniker": "src\\parser.h",
               "ToolTip": "D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\parser.h",
               "RelativeToolTip": "src\\parser.h",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABIAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAA4wCsAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-09-21T16:07:41.842Z"
+              "WhenOpened": "2025-09-21T16:07:41.842Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "parser.cpp",
               "DocumentMoniker": "D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\parser.cpp",
               "RelativeDocumentMoniker": "src\\parser.cpp",
               "ToolTip": "D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\parser.cpp",
               "RelativeToolTip": "src\\parser.cpp",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAYwHUAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAOEBAAAAAAAAAADwvyYCAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-09-19T22:44:24.177Z"
+              "WhenOpened": "2025-09-19T22:44:24.177Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -151,7 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "lexer.cpp",
               "DocumentMoniker": "D:\\Arquivos\\Developers\\CPP\\nucleolang\\source\\nucleo\\src\\lexer.cpp",
               "RelativeDocumentMoniker": "src\\lexer.cpp",

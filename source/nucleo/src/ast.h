@@ -51,6 +51,7 @@ struct ExpressionStatement : Statement {
 	std::unique_ptr<Expression> expression;
 };
 
+
 struct VariableDeclaration : Statement {
 	std::string name;
 	std::unique_ptr<Expression> initializer;
@@ -63,6 +64,47 @@ struct BlockStatement : Statement {
 	std::vector<std::unique_ptr<Statement>> statements;
 };
 
+// Flow Statements 
+
+struct IfStatement : Statement {
+	std::unique_ptr<Expression> condition;
+	std::unique_ptr<Statement> thenBranch;
+	std::unique_ptr<Statement> elseBranch;
+};
+
+struct WhileStatement : Statement {
+	std::unique_ptr<Expression> condition;
+	std::unique_ptr<Statement> body;
+};
+
+struct ForStatement : Statement {
+	std::unique_ptr<Expression> condition;
+	std::unique_ptr<Statement> body;
+};
+
+struct ForeachStatement : Statement {
+	std::unique_ptr<Expression> condition;
+	std::unique_ptr<Statement> body;
+};
+
+struct DoWhileStatement : Statement {
+	std:: unique_ptr<Expression> condition;
+	std::unique_ptr<Statement> body;
+};
+
+struct CaseStatement : Statement {
+	std::unique_ptr<Expression> condition;
+	std::unique_ptr<Statement> body;
+};
+
+struct SwitchStatement : Statement {
+	std::unique_ptr<Expression> condition;
+	std::vector<std::unique_ptr<CaseStatement>> cases;
+	std::unique_ptr<Statement> defaultCase;
+};
+
+
+// Program
 struct Program {
 	std::vector<std::unique_ptr<Statement>> statements;
 };

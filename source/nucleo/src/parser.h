@@ -40,4 +40,12 @@ private:
 	std::unique_ptr<Expression> parsePrimary();
 	std::unique_ptr<Statement> parseBlock();
 	std::unique_ptr<Statement> parseVariableDeclaration();
+	// Flow Statements
+	std::unique_ptr<Statement> parseIfStatement();
+	std::unique_ptr<Statement> parseWhileStatement();
+	std::unique_ptr<Statement> parseDoWhileStatement();
+	std::unique_ptr<Statement> parseForStatement();
+	std::unique_ptr<Statement> parseForeachStatement();
+	std::unique_ptr<Statement> parseSwitchStatement();
+
 };
